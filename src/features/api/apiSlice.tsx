@@ -11,7 +11,7 @@ export interface Product {
 
 }
 
-export interface ListResponse<T> {
+export interface ListResponse<Product> {
     page: number
     per_page: number
     total: number
