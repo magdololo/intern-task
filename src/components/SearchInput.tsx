@@ -2,7 +2,7 @@ import {Stack, TextField} from "@mui/material";
 import React, {useState} from "react";
 import {useSearchParams} from "react-router-dom";
 
-interface SearchInputProps{
+export interface SearchInputProps{
     setProductId: (productId: number) => void;
 }
 const SearchInput=({setProductId}:SearchInputProps)=>{
@@ -25,6 +25,7 @@ const SearchInput=({setProductId}:SearchInputProps)=>{
                 <TextField
                     id="outlined-number"
                     label="Id product"
+                    name={'productId'}
                     type="text"
                     onBlur={handleOnBlur}
                     inputProps={{onKeyPress: (event:React.KeyboardEvent<HTMLInputElement>) => {

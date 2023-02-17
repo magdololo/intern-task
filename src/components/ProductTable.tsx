@@ -52,8 +52,12 @@ export default function ProductTable({productId}: ProductTableProps) {
 
     const [page, setPage] = useState(pageFromQueryString ? Number(pageFromQueryString) : 0);
     const { data: products, isLoading, isError, error} = useListProductsQuery(!productId || productId === 0? page+1 : skipToken  )
-    let {data: singleProduct, error: singleProductError, isError: singleProductIsError} = useSingleProductQuery(productId && productId !== 0? productId : skipToken)
 
+
+    let {data: singleProduct, error: singleProductError, isError: singleProductIsError} = useSingleProductQuery(productId && productId !== 0? productId : skipToken)
+    console.log(productId)
+    console.log(singleProduct)
+    console.log(products)
     const [selectedProduct, setSelectedProduct ] = useState<Product|null>(null)
     const [open, setOpen] = useState(false)
     const handleOpen = () => setOpen(true);
@@ -118,12 +122,12 @@ export default function ProductTable({productId}: ProductTableProps) {
                             ))}
                         </TableRow>
                     </TableHead>
-                    <TableBody>
+                    <TableBody data-testId={'products'}>
                         {productsList?
                             productsList
                             .map((product) => {
                                 return (
-                                    <TableRow hover role="checkbox" tabIndex={-1} key={product.name} style={{backgroundColor: product.color, cursor: 'pointer'}} onClick={
+                                    <TableRow hover role="row" tabIndex={-1} key={product.name} style={{backgroundColor: product.color, cursor: 'pointer'}} onClick={
                                         ()=>{
                                             setSelectedProduct(product)
                                             handleOpen()

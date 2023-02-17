@@ -28,7 +28,10 @@ export const apiSlice = createApi({
         }),
         singleProduct: build.query<Product,number>({
             query: (productId) => `/products/${productId}`,
-            transformResponse: (response: { data: Product}) => response.data,
+            transformResponse: (response: { data: Product}) => {
+                console.log(response)
+                return response.data
+            },
             transformErrorResponse:(
                 response: { status: string | number }
             ) => response.status,

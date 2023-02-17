@@ -8,10 +8,10 @@ import {Box} from "@mui/material";
 
 function App() {
   return (
+
     <Box className="App">
          <Routes>
              <Route path="/" element={<Main/>}/>
-
          </Routes>
     </Box>
   );
