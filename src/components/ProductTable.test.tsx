@@ -60,8 +60,6 @@ const handlers = [
                 responseObject.data.push(product)
         }
 
-        console.log(responseObject)
-
         return res( //musi byc taki obiekt jaki otrzymujemy z prawdziwego zadania i on jest w konsoli Network Preview/Podglad
             ctx.json(responseObject)
             )
@@ -74,9 +72,6 @@ const handlers = [
             color: 'yellow',
             pantone_value: '#000000'
         }
-
-        console.log(responseObject)
-
         return res( //musi byc taki obiekt jaki otrzymujemy z prawdziwego zadania i on jest w konsoli Network Preview/Podglad
 
             ctx.json({data: responseObject})
@@ -87,14 +82,12 @@ const handlers = [
 
 const server = setupServer(...handlers);
 
-//wywołujemy trzy funkcje mowimy zeby serwer zeby zaczał przechwytywac te trzy requesty
-beforeAll(()=>{ //bedzie wywolana RAZ!!! przed wszystkimi testami w tym pliku
-  server.listen(); //nasłuchuj na przychodzace zadania
+beforeAll(()=>{
+  server.listen();
 });
-afterEach(()=>{ //bedzie wywołana po KAZDYM INDYWIDUALNYM TESCIE!!  w tym pliku
-    server.resetHandlers() //zresetuj kazdy z tych handlerów do ich defaultowego stanu
+afterEach(()=>{
 });
-afterAll(()=>{ //po wszystkich testach
+afterAll(()=>{
     server.close()
 });
 
@@ -125,9 +118,6 @@ test('check if next page button shows next set of products', async ()=>{
 
 test ('check if selected product is visible on the page', async()=>{
     let selectedProductId = renderComponentWithParameter()
-    console.log(selectedProductId)
-    //screen.debug(undefined,50000)
-   //
     const visibleProduct = await screen.findByRole("row", {name: new RegExp(`Product name ${selectedProductId}`)})
     expect(visibleProduct).toBeInTheDocument()
 })

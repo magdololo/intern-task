@@ -49,15 +49,9 @@ export default function ProductTable({productId}: ProductTableProps) {
 
     let [searchParams, setSearchParams] = useSearchParams();
     let pageFromQueryString = searchParams.get("page")
-
     const [page, setPage] = useState(pageFromQueryString ? Number(pageFromQueryString) : 0);
     const { data: products, isLoading, isError, error} = useListProductsQuery(!productId || productId === 0? page+1 : skipToken  )
-
-
     let {data: singleProduct, error: singleProductError, isError: singleProductIsError} = useSingleProductQuery(productId && productId !== 0? productId : skipToken)
-    console.log(productId)
-    console.log(singleProduct)
-    console.log(products)
     const [selectedProduct, setSelectedProduct ] = useState<Product|null>(null)
     const [open, setOpen] = useState(false)
     const handleOpen = () => setOpen(true);
